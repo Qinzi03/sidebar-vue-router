@@ -11,7 +11,7 @@ module.exports = {
   externals: {
     'element-ui': 'element-ui',
     'path': 'path',
-    'vue-router': 'vue-router',
+    'vue-router': 'vue-router'
   },
   module: {
     rules: [
@@ -21,7 +21,8 @@ module.exports = {
           'vue-style-loader',
           'css-loader'
         ],
-      },      {
+      },
+      {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
