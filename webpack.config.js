@@ -1,17 +1,16 @@
 var path = require('path')
 var webpack = require('webpack')
 
+function resolve(dir) {
+  return path.join(__dirname, '.', dir)
+}
+
 module.exports = {
   entry: process.env.NODE_ENV === 'development'?'./src/main.js' : './src/index',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
     filename: 'build.js'
-  },
-  externals: {
-    'element-ui': 'element-ui',
-    'path': 'path',
-    'vue-router': 'vue-router'
   },
   module: {
     rules: [
@@ -37,7 +36,15 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.svg$/,
+        loader: 'svg-sprite-loader',
+        include: [resolve('src/icons')],
+        options: {
+          symbolId: 'icon-[name]'
+        }
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]?[hash]'
